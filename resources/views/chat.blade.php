@@ -40,7 +40,8 @@
                             <button class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle" type="button"
                                 data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
                                 aria-controls="offcanvasRight">
-                                <i class=" ri-question-answer-line fs-22"></i></button>
+                                <i class="ri-question-answer-line fs-22"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -69,17 +70,16 @@
 
                                         <!-- Vòng lặp tin nhắn người dùng và phản hồi từ hệ thống -->
                                         @foreach ($chats as $chat)
-                                            <div class="user-message mb-3"
-                                                style="text-align: right; margin-bottom: 10px;">
+                                            <div class="user-message mb-3" style="text-align: right;">
                                                 <span
-                                                    style="background-color: #d1e7dd; padding: 8px 12px; border-radius: 15px; display: inline-block; max-width: 300px;">
+                                                    style="background-color: #d1e7dd; padding: 8px 12px; border-radius: 15px; display: inline-block;">
                                                     {!! nl2br(preg_replace('/\*\*(.*?)\*\*/', '<strong>$1</strong>', e($chat->prompt))) !!}
                                                 </span>
                                             </div>
 
-                                            <div class="ai-response mb-3" style="margin-bottom: 10px;">
+                                            <div class="ai-response mb-3">
                                                 <span
-                                                    style="background-color: #f1f1f1; padding: 8px 12px; border-radius: 15px; display: inline-block; max-width: 300px;">
+                                                    style="background-color: #f1f1f1; padding: 8px 12px; border-radius: 15px; display: inline-block;">
                                                     {!! nl2br(preg_replace('/\*\*(.*?)\*\*/', '<strong>$1</strong>', e($chat->response))) !!}
                                                 </span>
                                             </div>
@@ -101,16 +101,12 @@
                                         <div class="row g-0 align-items-center">
                                             <div class="col-auto">
                                                 <div class="chat-input-links me-2">
-                                                    <div class="links-list-item">
-                                                        <button type="button" class="btn btn-danger"
-                                                            data-bs-toggle="modal" data-bs-target="#confirmDeleteModal"
-                                                            id="delete-btn">
-                                                            <i class=" ri-delete-bin-5-fill align-middle"></i>
-                                                        </button>
-                                                    </div>
+                                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                                        data-bs-target="#confirmDeleteModal" id="delete-btn">
+                                                        <i class="ri-delete-bin-5-fill align-middle"></i>
+                                                    </button>
                                                 </div>
                                             </div>
-
                                             <div class="col">
                                                 <div class="chat-input-feedback" id="inputFeedback"
                                                     style="display: none;">
@@ -121,15 +117,11 @@
                                                     placeholder="Nhập tin nhắn" name="prompt" autocomplete="off">
                                             </div>
                                             <div class="col-auto">
-                                                <div class="chat-input-links ms-2">
-                                                    <div class="links-list-item">
-                                                        <button type="submit" id="sendBtn"
-                                                            class="btn btn-success chat-send waves-effect waves-light"
-                                                            disabled>
-                                                            <i class="ri-send-plane-2-fill align-bottom"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
+                                                <button type="submit" id="sendBtn"
+                                                    class="btn btn-success chat-send waves-effect waves-light"
+                                                    disabled>
+                                                    <i class="ri-send-plane-2-fill align-bottom"></i>
+                                                </button>
                                             </div>
                                         </div>
                                     </form>
@@ -143,7 +135,6 @@
             </div>
         </div>
 
-
         <!-- Modal xác nhận xóa -->
         <div class="modal fade" id="confirmDeleteModal" aria-hidden="true" tabindex="-1">
             <div class="modal-dialog modal-dialog-centered">
@@ -152,9 +143,7 @@
                         <lord-icon src="https://cdn.lordicon.com/zpxybbhl.json" trigger="loop"
                             colors="primary:#405189,secondary:#0ab39c" style="width:150px;height:150px">
                         </lord-icon>
-                        <div class="mt-3">
-                            <h4>Bạn có chắc chắn muốn xóa toàn bộ lịch sử chat không?</h4>
-                        </div>
+                        <h4 class="mt-3">Bạn có chắc chắn muốn xóa toàn bộ lịch sử chat không?</h4>
                         <div class="mt-4">
                             <button type="button" class="btn btn-danger" id="confirmDelete">Xóa</button>
                             <button type="button" class="btn btn-light" data-bs-dismiss="modal">Hủy</button>
@@ -171,29 +160,13 @@
                     <div class="modal-body text-center p-5">
                         <lord-icon src="https://cdn.lordicon.com/gsqxdxog.json" trigger="loop"
                             colors="primary:#f7b84b,secondary:#f06548" style="width:100px;height:100px"></lord-icon>
-
-                        <div class="mt-4 pt-3">
-                            <h4>Đã xóa thành công lịch sử chat!</h4>
-                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Đóng</button>
-                        </div>
+                        <h4 class="mt-4 pt-3">Đã xóa thành công lịch sử chat!</h4>
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Đóng</button>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- JAVASCRIPT -->
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                // Listen for the offcanvas open event
-                const chatOffcanvas = document.getElementById('chatAi');
-                chatOffcanvas.addEventListener('shown.bs.offcanvas', function() {
-                    // Scroll to the bottom of the chat conversation on open
-                    const chatConversation = document.getElementById('chat-conversation');
-                    chatConversation.scrollTop = chatConversation.scrollHeight;
-                });
 
-            });
-        </script>
         <style>
             #chat-conversation {
                 height: 550px;
@@ -201,106 +174,124 @@
                 overflow-y: auto;
             }
         </style>
+
+        <!-- JAVASCRIPT -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
             $(document).ready(function() {
-                // Disable the send button initially
-                $('#sendBtn').prop('disabled', true);
+                const chatOffcanvas = $('#offcanvasRight');
+                const chatConversation = $('#chat-conversation');
+                const responseBox = $('#responseBox');
+                const loadingSpinner = $('#loadingSpinner');
+                const sendBtn = $('#sendBtn');
+                const promptInput = $('#prompt');
+                const inputFeedback = $('#inputFeedback');
 
-                // Lắng nghe sự thay đổi trong ô nhập liệu
-                $('#prompt').on('input', function() {
-                    // Nếu ô nhập trống, disable nút "Gửi"
-                    if ($(this).val().trim() === '') {
-                        $('#sendBtn').prop('disabled', true);
-                    } else {
-                        // Nếu có dữ liệu, enable nút "Gửi"
-                        $('#sendBtn').prop('disabled', false);
-                    }
+                // Khi offcanvas mở, cuộn xuống dưới
+                chatOffcanvas.on('shown.bs.offcanvas', function() {
+                    chatConversation.scrollTop(chatConversation[0].scrollHeight);
                 });
 
+
+                // Lắng nghe sự thay đổi trong ô nhập liệu
+                promptInput.on('input', function() {
+                    // Kiểm tra xem ô nhập liệu có giá trị hay không
+                    const isInputEmpty = $(this).val().trim() === '';
+                    sendBtn.prop('disabled', isInputEmpty); // Vô hiệu hóa nút gửi nếu ô input trống
+                });
+
+
+
+                // Gửi biểu mẫu chat
                 $('#chatinput-form').on('submit', function(event) {
-                    event.preventDefault(); // Ngăn chặn hành động gửi biểu mẫu mặc định
+                    event.preventDefault();
+                    const prompt = promptInput.val().trim();
 
-                    // Lấy giá trị từ ô nhập liệu
-                    let prompt = $('#prompt').val();
+                    // Disable input and show loading spinner
+                    sendBtn.prop('disabled', true);
+                    promptInput.prop('disabled', true);
+                    loadingSpinner.show();
 
-                    // Nếu ô nhập trống, không làm gì cả
-                    if (prompt.trim() === '') {
-                        return; // Không hiển thị alert
-                    }
-
-                    // Disable nút "Gửi" và ô nhập
-                    $('#sendBtn').prop('disabled', true);
-                    $('#prompt').prop('disabled', true);
-
-                    // Hiển thị tin nhắn của người dùng
-                    $('#responseBox').append(
-                        '<div class="user-message" style="text-align: right; margin-bottom: 10px;"><span style="background-color: #d1e7dd; padding: 8px 12px; border-radius: 15px; display: inline-block;">' +
-                        prompt + '</span></div>'
+                    // Hiển thị tin nhắn người dùng
+                    responseBox.append(
+                        `<div class="user-message mb-3" style="text-align: right;">
+                            <span style="background-color: #d1e7dd; padding: 8px 12px; border-radius: 15px; display: inline-block;">${prompt}</span>
+                        </div>`
                     );
 
                     // Xóa nội dung trong ô nhập liệu
-                    $('#prompt').val('');
+                    promptInput.val('');
 
                     // Gửi yêu cầu AJAX đến server
                     $.ajax({
-                        url: $(this).attr('action'), // URL từ thuộc tính action của form
+                        url: $(this).attr('action'),
                         type: 'POST',
                         data: {
                             prompt: prompt,
-                            _token: $('input[name="_token"]').val() // Gửi token CSRF
+                            _token: $('input[name="_token"]').val()
                         },
                         success: function(response) {
-                            // Hiển thị phản hồi từ máy chủ
-                            const responseText = response.chat.response; // Lấy phản hồi từ JSON
-
-                            // Thay thế các dấu ** bằng chữ in đậm và các ký tự xuống dòng bằng <br>
-                            let formattedResponse = responseText.replace(/\*\*(.*?)\*\*/g,
-                                '<strong>$1</strong>');
-                            formattedResponse = formattedResponse.replace(/\n/g, '<br>');
-
-                            // Hiển thị phản hồi từ hệ thống
-                            $('#responseBox').append(
-                                `<div class="ai-response" style="margin: 10px 0; padding: 10px; background: #f1f1f1; border-radius: 8px;">${formattedResponse}</div>`
+                            const responseText = response.chat.response.replace(/\*\*(.*?)\*\*/g,
+                                '<strong>$1</strong>').replace(/\n/g, '<br>');
+                            loadingSpinner.hide();
+                            responseBox.append(
+                                `<div class="ai-response mb-3" style="background: #f1f1f1; padding: 8px 12px; border-radius: 15px;">
+                                    ${responseText}
+                                </div>`
                             );
 
-                            // Cuộn xuống dưới khi có tin nhắn mới
-                            $('#chat-conversation').scrollTop($('#chat-conversation')[0]
-                                .scrollHeight);
+                            // Ẩn thông điệp mặc định nếu có tin nhắn
+                            if (responseBox.children('.default-message').length) {
+                                $('.default-message').hide();
+                            }
 
-                            // Xóa giá trị input sau khi gửi
-                            $('#prompt').val('');
+                            // Cuộn xuống dưới khi có phản hồi
+                            chatConversation.scrollTop(chatConversation[0].scrollHeight);
                         },
-                        error: function(xhr, status, error) {
-                            console.error('Error:', error);
-                            alert('An error occurred. Please try again.');
+                        error: function(xhr) {
+                            loadingSpinner.hide();
+                            inputFeedback.show().text(
+                                'Có lỗi xảy ra, vui lòng thử lại.'); // Hiển thị lỗi
                         },
                         complete: function() {
-                            // Re-enable nút "Gửi" và ô nhập sau khi yêu cầu hoàn tất
-                            $('#sendBtn').prop('disabled', false);
-                            $('#prompt').prop('disabled', false);
+                            sendBtn.prop('disabled', false);
+                            promptInput.prop('disabled', false);
                         }
                     });
                 });
+
+                $('#confirmDelete').on('click', function() {
+                    $.ajax({
+                        url: '/chat', // Set this to your actual route for deleting chat history
+                        type: 'DELETE',
+                        data: {
+                            _token: $('input[name="_token"]')
+                                .val() // Getting CSRF token from the form input
+                        },
+                        success: function(response) {
+                            $('#successModal').modal('show'); // Show success modal
+                            responseBox.empty(); // Clear chat display
+                            $('.default-message').show(); // Show default message again
+                            $('#confirmDeleteModal').modal('hide'); // Hide confirmation modal
+                        },
+                        error: function(xhr) {
+                            const errorMessage = xhr.responseJSON && xhr.responseJSON.error ?
+                                xhr.responseJSON.error :
+                                'Có lỗi xảy ra, vui lòng thử lại.';
+                            $('#errorMessage').text(errorMessage); // Update error message
+                            $('#errorModal').modal('show'); // Show error modal
+                        }
+                    });
+                });
+
             });
         </script>
-
-        <!-- prismjs plugin -->
-        <script src="{{ asset('assets/libs/prismjs/prism.js') }}"></script>
-
-        <!-- glightbox js -->
-        <script src="{{ asset('theme/assets/libs/glightbox/js/glightbox.min.js') }}"></script>
-
-        <!-- fgEmojiPicker js -->
-        <script src="{{ asset('theme/assets/libs/fg-emoji-picker/fgEmojiPicker.js') }}"></script>
-        <!-- Bootstrap JS -->
         <script src="{{ asset('theme/assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-        <script src="{{ asset('theme/assets/libs/simplebar/simplebar.min.js') }}"></script>
-        <script src="{{ asset('theme/assets/libs/node-waves/waves.min.js') }}"></script>
-        <script src="{{ asset('theme/assets/libs/feather-icons/feather.min.js') }}"></script>
-        <script src="{{ asset('theme/assets/js/pages/plugins/lord-icon-2.1.0.js') }}"></script>
         <script src="{{ asset('theme/assets/js/plugins.js') }}"></script>
         <!-- App js -->
         <script src="{{ asset('theme/assets/js/app.js') }}"></script>
+    </div>
+
 </body>
 
 </html>

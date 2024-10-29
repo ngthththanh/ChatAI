@@ -11,7 +11,6 @@ class ChatAIController extends Controller
 {
     public function index(Request $request)
     {
-
         $chats = Chat::all();
         return view('chat', compact('chats'));
     }
@@ -64,9 +63,8 @@ class ChatAIController extends Controller
                     return response()->json(['error' => 'Malformed API response'], 500);
                 }
 
-                // Tạo và lưu lịch sử chat vào database
+                // Save chat history in the database
                 $chat = Chat::create([
-                    'user_id' => auth()->id(),  // Liên kết với người dùng đã xác thực
                     'prompt' => $prompt,
                     'response' => $responseText,
                 ]);
@@ -82,13 +80,8 @@ class ChatAIController extends Controller
 
     public function destroy()
     {
-        $userId = auth()->id();
-
-        try {
-            Chat::where('user_id', $userId)->delete();
-            return response()->json(['message' => 'Chat history deleted successfully'], 200);
-        } catch (\Exception $e) {
-            return response()->json(['error' => 'Failed to delete chat history'], 500);
-        }
+        Chat::truncate(); // hoặc thực hiện xóa theo điều kiện phù hợp
+        return response()->json(['message' => 'Lịch sử chat đã được xóa thành công.']);
     }
+
 }
